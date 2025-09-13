@@ -10,11 +10,14 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "dlam-table": [
-        "./dist/dlam-table"
+      "delam-grid": [
+        "./dist/delam-grid"
       ],
-      "my-lib": [
-        "./dist/my-lib"
+      "dlam-grid": [
+        "./dist/dlam-grid"
+      ],
+      "dlam-table": [
+        "./dist/lib/dlam-table"
       ]
     },
     "skipLibCheck": true,

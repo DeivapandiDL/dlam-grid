@@ -1,7 +1,8 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/dlam-table",
+  "dest": "../../dist/delam-grid",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": ["style.scss"]
 }

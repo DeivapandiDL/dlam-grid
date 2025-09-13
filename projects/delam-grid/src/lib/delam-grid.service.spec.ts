@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DlamTableService } from './dlam-table.service';
+import { DelamGridService } from './delam-grid.service';
 
-describe('DlamTableService', () => {
-  let service: DlamTableService;
+describe('DelamGridService', () => {
+  let service: DelamGridService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DlamTableService);
+    service = TestBed.inject(DelamGridService);
   });
 
   it('should be created', () => {

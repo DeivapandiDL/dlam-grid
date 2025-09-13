@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DlamTableComponent } from './dlam-table.component';
+import { RenderercolumnComponent } from './renderercolumn.component';
 
-describe('DlamTableComponent', () => {
-  let component: DlamTableComponent;
-  let fixture: ComponentFixture<DlamTableComponent>;
+describe('RenderercolumnComponent', () => {
+  let component: RenderercolumnComponent;
+  let fixture: ComponentFixture<RenderercolumnComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DlamTableComponent]
+      imports: [RenderercolumnComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DlamTableComponent);
+    fixture = TestBed.createComponent(RenderercolumnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

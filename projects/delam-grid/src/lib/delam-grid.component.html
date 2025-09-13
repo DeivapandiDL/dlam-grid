@@ -1,0 +1,83 @@
+<div class="dlam-table-container">
+<div class="dLam-Table">
+<table [style.width.px]="tableWidth > 0 ? tableWidth : 1000">
+  <thead>
+    <tr>
+      @for(header of tableHeader; track $index; let colIndex = $index) {  
+      <th [ngClass]="header?.class?.headerClass"  [draggable]="header.isDraggable"
+          (dragstart)="onDragStart($event, colIndex)"
+          (dragover)="onDragOver($event)"
+          (drop)="onDrop($event, colIndex)" [style.width.px]="header.width ? header.width : '200'">
+          <div [ngClass]="header?.class?.headerColClass">{{header.headerName}}
+
+             @if (header.isSort) {
+        <button class="dlam-sort" (click)="toggleSort(header.keyName)">
+            <span [ngClass]="sortType === 'asc' ? 'dlam-asc' : 'dlam-desc'">
+                {{sortType === 'asc' ? "&uarr;" : "&darr;"}}
+            </span>
+        </button>
+        }
+
+        @if (header.isFilterEnabled) {
+            <button class="filterIcon" (click)="toggleFilterDropdown(header.keyName,colIndex)">&#9662;</button>
+            @if (dropdownIndex === colIndex){<div class="table-grid-overlay">
+                <app-dlam-dropdown [colummnFilterList]="filterObject[header.keyName]" (toggleDropdown)="toggleDropdown($event)" (getInputFilteredList)="getfilteredData($event)"></app-dlam-dropdown>
+            </div>}
+        }
+
+          </div>
+          @if (header.resize) {<div (mousedown)="onMouseDown()" (mouseup)="onMouseUp()" (mousemove)="startResize($event,colIndex)" class="resizeDiv"></div> }
+          </th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @if (tableDataList && tableDataList.length > 0) {
+    @for(row of paginatedTableList; track $index; let rowIndex = $index) {
+    <tr>
+        @for(cell of tableHeader; track $index; let colIndex = $index) {
+      <td [ngClass]="cell?.class?.bodyClass" [style.width.px]="cell.width ? cell.width : '200'" [height]="cell.height ? cell.height : '40px'">
+        <div (click)="cell.callbackEvent ? cell.callbackEvent(cell,row) : (cell.rowComponentRenderer ? ontriggerClick(cell, row) : null)" [ngClass]="cell?.class?.bodyColClass">
+        @if (cell.colRenderer) {
+            {{ cell.colRenderer(row)}}
+        }
+        @else if(cell?.colcomponentRenderer) {
+            <app-dynamiccomponent [childDynamicComponent]="cell?.colcomponentRenderer" [childRowInput]="row" [columnName]="row[cell.keyName]"></app-dynamiccomponent>
+        }
+        @else {
+            {{row[cell.keyName]}}
+        }
+        </div>
+      </td>
+     }
+    </tr>
+    @if (row['isRowEnabled']) {
+    <tr>
+        <td [attr.colspan]="tableHeader.length">
+          <app-dynamiccomponent [childDynamicComponent]="row['childRowInput'] ? row['childRowInput'] : undefined" [childRowInput]="row"></app-dynamiccomponent>
+        </td>
+    </tr>
+    }
+ }
+}
+@else {
+  <tr>
+    <td [attr.colspan]="tableHeader.length">
+      <h3> No Records Found</h3>
+    </td>
+  </tr>
+}
+  </tbody>
+</table>
+</div>
+<div class="pagination">
+  <div class="pagination-controls">
+      <button (click)="goToPage(1)" [disabled]="currentPage === 1">&laquo;</button>
+      <button (click)="prevPage()" [disabled]="currentPage === 1">&#x23EE;</button>
+
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">&#x23ED;</button>
+      <button (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages">&raquo;</button>
+
+    </div>
+</div>
+</div>

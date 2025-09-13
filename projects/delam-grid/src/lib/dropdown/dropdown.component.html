@@ -1,0 +1,13 @@
+<div class="table-dropdown-overlay" id="dlam-tableDropdown" (document:click)="onDocumentClick($event)">
+        <div class="table-dropdown-container">
+            @for(data of colummnFilterList;track $index;let colIndex = $index) {
+            <button (click)="getfilteredData(colIndex)">
+             <input type="checkbox" [checked]="data.ischecked"> {{data.keyName}}
+            </button>
+            }
+        </div>
+        <div class="dlam-footer">
+            <button (click)="resetFilter()">Reset</button>
+            <button class="apply" (click)="applyFilter()">Apply</button>
+        </div>
+</div>
