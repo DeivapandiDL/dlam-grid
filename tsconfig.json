@@ -9,6 +9,14 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "dlam-table": [
+        "./dist/dlam-table"
+      ],
+      "my-lib": [
+        "./dist/my-lib"
+      ]
+    },
     "skipLibCheck": true,
     "isolatedModules": true,
     "esModuleInterop": true,
